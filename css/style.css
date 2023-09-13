@@ -1,0 +1,15 @@
+.calculator-container{
+    padding: 8px;
+    gap:16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container{
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
