@@ -1,4 +1,5 @@
 .calculator-container{
+    height: 100vh;
     padding: 8px;
     gap:16px;
     display: flex;
@@ -7,9 +8,29 @@
     align-items: center;
 }
 
-.button-container{
+.display{
     display: flex;
-    gap: 8px;
+    height: 50px;
+    width: 150px;
     justify-content: center;
     align-items: center;
+    border: 2px solid grey;
+    background-color: green;
+    color:white;
+}
+
+.button-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.button-row {
+    display: flex;
+    gap:  8px;
+    justify-content: space-between;
+}
+
+.button-row #zero-button {
+    flex-grow: 1;
 }
