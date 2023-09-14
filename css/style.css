@@ -8,14 +8,26 @@
     align-items: center;
 }
 
-.display{
+.display,
+.sub-display{
     display: flex;
     height: 50px;
     width: 150px;
     justify-content: center;
     align-items: center;
+    border-radius: 8px;
+   
+}
+
+.display {
     border: 2px solid grey;
     background-color: green;
+    color:white;
+}
+
+.sub-display {
+    border: 2px solid grey;
+    background-color: rgb(77, 77, 77);
     color:white;
 }
 
