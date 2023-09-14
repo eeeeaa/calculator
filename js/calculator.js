@@ -1,4 +1,7 @@
 /****CALCULATOR PROJECT ****/
+//State Zero: temporary state after calculation
+//State One: state for first number input
+//State Two: state for second number input
 
 const display = document.querySelector(".display");
 const subDisplay = document.querySelector(".sub-display");
@@ -31,6 +34,9 @@ const nonOperations = {
     },
     ".":() => {
         decimalNonOperation();
+    },
+    "+/-":() => {
+        positiveNegativeNumber();
     }
 };
 
@@ -82,15 +88,53 @@ function decimalNonOperation(){
             calculationObject.firstNumber += ".";
             currentText = calculationObject.firstNumber;
         }
+        updateDisplay(currentText);
     }else if(currentState === STATE.STATE_TWO) {
         if(calculationObject.secondNumber !== "" && 
         !calculationObject.secondNumber.includes(".")){
             calculationObject.secondNumber += ".";
             currentText = calculationObject.secondNumber;
         }
+        updateDisplay(currentText);
     }
     
-    updateDisplay(currentText);
+}
+
+function positiveNegativeNumber(){
+    if(currentState === STATE.STATE_ONE){
+        if(calculationObject.firstNumber !== ""){
+            if(calculationObject.firstNumber.includes("-")){
+                calculationObject.firstNumber = 
+                calculationObject.firstNumber.replace("-","");
+
+                currentText = calculationObject.firstNumber;
+                
+            }else{
+                calculationObject.firstNumber = 
+                "-" + calculationObject.firstNumber;
+                currentText = calculationObject.firstNumber;
+            }
+            updateDisplay(currentText);
+        }
+    }else if(currentState === STATE.STATE_TWO) {
+        if(calculationObject.secondNumber !== ""){
+            if(calculationObject.secondNumber.includes("-")){
+                calculationObject.secondNumber = 
+                calculationObject.secondNumber.replace("-","");
+                currentText =calculationObject.secondNumber;
+                
+            }else{
+                calculationObject.secondNumber = 
+                "-" + calculationObject.secondNumber;
+                currentText = calculationObject.secondNumber;
+            }
+            updateDisplay(currentText);
+        }
+    } else if(currentState === STATE.STATE_ZERO){
+        currentState = STATE.STATE_ONE;
+        positiveNegativeNumber();
+        return;
+    }
 }
 
 function add(a,b){
@@ -161,8 +205,7 @@ function checkNonOperationValidation(){
 
 function updateDisplay(displayText){
     let subText = `${calculationObject.firstNumber} 
-    ${calculationObject.operand} ${calculationObject.secondNumber} 
-    ${calculationObject.nonOperand}`;
+    ${calculationObject.operand} ${calculationObject.secondNumber}`;
 
     subDisplay.textContent = subText;
     display.textContent = displayText;
