@@ -40,6 +40,11 @@ const nonOperations = {
     }
 };
 
+const specialCases = {
+    divideByZero: () => {return "The universe explodes!";},
+    
+}
+
 buttons.forEach((button)=> {
     button.addEventListener('click', (e) => {
         InputMapping(button);
@@ -161,13 +166,22 @@ function round(n){
     return Math.round((n + Number.EPSILON) * 10000) / 10000;
 }
 
+
 function performCalculation(chainOperator){
     let result = round(operations[calculationObject.operand](
         +calculationObject.firstNumber, 
         +calculationObject.secondNumber
         ));
+    let specialCase = null;
+    if(calculationObject.operand === "/" && +calculationObject.secondNumber === 0){
+        specialCase = specialCases.divideByZero();
+    }
     onCalculationFinished(result, chainOperator);
-    return result;
+    if(specialCase != null){
+        return specialCase;
+    }else {
+       return result; 
+    }
 }
 
 function onCalculationFinished(result, chainOperator){
