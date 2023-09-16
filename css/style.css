@@ -1,6 +1,21 @@
+@import url('https://fonts.cdnfonts.com/css/common-pixel');
+* {
+    font-family: 'Common Pixel', 'Arial Narrow', Arial, sans-serif;
+}
+body {
+    height: 100vh; 
+    display: flex;
+    background: linear-gradient(#413f63, #121720);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .calculator-container{
-    height: 100vh;
-    padding: 8px;
+    background-color: #3a393a;
+    border: 2px solid rgb(185, 184, 184);
+    box-shadow: 0px 5px 0px #6c6d6d;
+    padding: 24px;
+    border-radius: 8px;
     gap:16px;
     display: flex;
     flex-direction: column;
@@ -8,11 +23,31 @@
     align-items: center;
 }
 
+.cal-logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 48px;
+    color: rgb(187, 187, 187);
+    font-size: x-small;
+    font-style: oblique;
+}
+
+.left-logo{
+    margin-right: auto;
+}
+.blank-space{
+    flex: auto;
+}
+.right-logo{
+    margin-left: auto;
+}
+
 .display,
 .sub-display{
     display: flex;
     height: 50px;
-    width: 150px;
+    width: 280px;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
@@ -20,17 +55,18 @@
 }
 
 .display {
-    border: 2px solid grey;
-    background-color: green;
+    border: 2px solid rgb(170, 168, 168);
+    background-color: rgb(161, 180, 108);
+    font-size: xx-large;
     color:white;
 }
 
 .sub-display {
     height: 30px;
-    border: 2px solid grey;
-    background-color: rgb(39, 37, 37);
+    border: 2px solid rgb(116, 114, 114);
+    background-color: rgb(120, 131, 92);
     color:rgb(199, 199, 199);
-    font-size: smaller;
+    font-size: small;
 }
 
 .button-container{
@@ -43,8 +79,43 @@
     display: flex;
     gap:  8px;
     justify-content: space-between;
+    flex: auto;
 }
 
 .button-row #zero-button {
     flex-grow: 1;
+}
+
+button {
+    position: relative;
+    top: 0px;
+    color:rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: x-large;
+    background: #1f1f1f;
+    padding: 16px;
+    border: 1px solid #8a8989;
+    border-radius: 5px;
+    box-shadow: 0px 5px 0px #8a8989;
+    transition: All 250ms ease;
+  }
+
+button:active {
+    position: relative;
+    top: 5px;
+    box-shadow: none !important;
+    transition: All 250ms ease;
+}
+
+.footer {
+    color: rgb(209, 209, 209);
+    font-family: 'Courier New', Courier, monospace;
+    font-size:small;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #252530;
+    padding: 24px;
 }
