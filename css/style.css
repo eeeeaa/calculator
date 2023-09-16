@@ -79,19 +79,24 @@ body {
 
 .button-container{
     display: flex;
+    width: 280px;
     flex-direction: column;
     gap: 8px;
 }
 
 .button-row {
     display: flex;
-    gap:  8px;
     justify-content: space-between;
+    gap: 8px;
     flex: auto;
 }
 
-.button-row #zero-button {
+.button-row *{
     flex-grow: 1;
+}
+
+.button-row #zero-button {
+    flex-grow: 4;
 }
 
 button {

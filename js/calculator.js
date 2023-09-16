@@ -38,6 +38,9 @@ const nonOperations = {
     },
     "+/-":() => {
         positiveNegativeNumber();
+    },
+    "BACK": () => {
+        backPress();
     }
 };
 
@@ -48,12 +51,58 @@ const specialCases = {
 
 buttons.forEach((button)=> {
     button.addEventListener('click', (e) => {
-        InputMapping(button);
+        InputMapping(button.textContent);
     });
 });
 
-function InputMapping(button){
-    let text = button.textContent;
+window.addEventListener('keydown', function(e){
+    e.preventDefault();
+    console.log(e.code);
+    let re = new RegExp("^Numpad[0-9]+$");
+    let re2 = new RegExp("^Digit[0-9]+$");
+    if(re.test(e.code) || re2.test(e.code)){
+        InputMapping(e.code.charAt(e.code.length - 1));
+    } else {
+        switch(e.code){
+            case "Space": {
+                InputMapping("AC");
+                break;
+            }
+            case "Enter":
+            case "Equal": {
+                InputMapping("=");
+                break;
+            }
+            case "NumpadAdd": {
+                InputMapping("+");
+                break;
+            }
+
+            case "Minus":
+            case "NumpadSubtract": {
+                InputMapping("-");
+                break;
+            }
+
+            case "NumpadMultiply": {
+                InputMapping("*");
+                break;
+            }
+
+            case "NumpadDivide": {
+                InputMapping("/");
+                break;
+            }
+            
+            case "NumpadDecimal": {
+                InputMapping(".");
+                break;
+            }
+        }  
+    }
+});
+
+function InputMapping(text){
     if(!isNaN(text)){
         console.log("numbers");
         if(currentState === STATE.STATE_ONE){
@@ -140,6 +189,26 @@ function positiveNegativeNumber(){
         currentState = STATE.STATE_ONE;
         positiveNegativeNumber();
         return;
+    }
+}
+
+function backPress(){
+    if(currentState === STATE.STATE_ONE || currentState === STATE.STATE_ZERO){
+        if(calculationObject.firstNumber !== ""){
+            calculationObject.firstNumber = calculationObject.firstNumber
+            .slice(0, calculationObject.firstNumber.length - 1);
+            
+            currentText = calculationObject.firstNumber;
+            updateDisplay(currentText);
+        }
+    }else if(currentState === STATE.STATE_TWO) {
+        if(calculationObject.secondNumber !== ""){
+            calculationObject.secondNumber = calculationObject.secondNumber
+            .slice(0, calculationObject.secondNumber.length - 1);
+            
+            currentText = calculationObject.secondNumber;
+            updateDisplay(currentText);
+        }
     }
 }
 
