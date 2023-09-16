@@ -3,8 +3,8 @@
 //State One: state for first number input
 //State Two: state for second number input
 
-const display = document.querySelector(".display");
-const subDisplay = document.querySelector(".sub-display");
+const display = document.querySelector(".display div");
+const subDisplay = document.querySelector(".sub-display div");
 const buttons = document.querySelectorAll(".button-container button");
 
 let currentText = "";
@@ -16,6 +16,7 @@ let calculationObject = {
     nonOperand: ""
 };
 
+const MAX_LENGTH = 8;
 const STATE = {STATE_ONE: 1, STATE_TWO: 2, STATE_ZERO: 0};
 let currentState = STATE.STATE_ONE;
 
@@ -172,6 +173,9 @@ function performCalculation(chainOperator){
         +calculationObject.firstNumber, 
         +calculationObject.secondNumber
         ));
+    if(`${result}`.length > MAX_LENGTH){
+        result = result.toExponential();
+    }
     let specialCase = null;
     if(calculationObject.operand === "/" && +calculationObject.secondNumber === 0){
         specialCase = specialCases.divideByZero();
@@ -220,7 +224,6 @@ function checkNonOperationValidation(){
 function updateDisplay(displayText){
     let subText = `${calculationObject.firstNumber} 
     ${calculationObject.operand} ${calculationObject.secondNumber}`;
-
     subDisplay.textContent = subText;
     display.textContent = displayText;
 }
